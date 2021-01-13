@@ -1,0 +1,1 @@
+Library poject is done for the Odin Project site. The main goal is to understand how objects and a prototype chain works in JavaScript
