@@ -1,0 +1,58 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+form {
+    width: 646px;
+    margin: auto;
+    border-radius: 20px;
+    border: 3px solid plum;
+    padding: 20px;
+}
+form h3{
+    color: plum;
+    text-align: center;
+    margin-bottom: 1em;
+}
+form label,
+form input {
+    display: block;
+    float: left;
+    font-size: 16px;
+}
+form label{
+    clear: left;
+    width: 200px;
+    margin-bottom: 1.5em;
+}
+form input{
+    width: 400px;
+    padding: 0.3em;
+}
+.right label,
+.right input{
+    display: inline;
+    float: none;
+    width: auto;
+}
+.right{
+    float: left;
+}
+form button{
+    display: block;
+    clear: both;
+    background-color: #ddd;
+    padding: 0.5em;
+    font-size: 16px;
+    margin: auto;
+    width: 120px;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
