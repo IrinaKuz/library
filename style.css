@@ -109,8 +109,8 @@ form button{
     border-radius: 6px;
     cursor: pointer;
 }
-
-@media all and (max-width: 1400px) {
+/* Tablet view */
+@media all and (max-width: 1200px) {
     main{
         padding: 1em;
         max-width: none;
@@ -120,7 +120,7 @@ form button{
         margin-right: 1em;
     }
 }
-
+/* Mobile view */
 @media all and (max-width: 800px) {
     form {
         width: 100%;
