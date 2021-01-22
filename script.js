@@ -19,10 +19,12 @@ function addBookToLibrary(book) {
 function displayBooks() {
     const libraryDiv = document.querySelector('.library');
     libraryDiv.innerHTML = '';
+    console.log('displayBooks function');
     for(let i =  0; i < library.length; i++) {
         console.log(library[i]);
         const bookDiv = document.createElement('div');
         bookDiv.setAttribute('class', 'card');
+        bookDiv.setAttribute('data-id', i);
         libraryDiv.appendChild(bookDiv);
         const title = document.createElement('h3');
         title.innerText = library[i].name;
@@ -45,6 +47,7 @@ function displayBooks() {
         closeBtn.setAttribute('title', 'delete book');
         bookDiv.appendChild(closeBtn);
     }
+    closeBtnsAddListeners();
 }
 
 if(localStorage.getItem('library')) {
@@ -59,9 +62,22 @@ if(localStorage.getItem('library')) {
         );
     displayBooks();
 }
+function closeBtnsAddListeners() {
+    const closeBtns = document.querySelectorAll('.closeBtn');
+    for (let i = 0; i < closeBtns.length; i++) {
+        closeBtns[i].addEventListener('click', function() {
+            console.log('hooray!');
+            const parentDivId = this.parentElement.getAttribute('data-id');
+            console.log('data-id: ' + parentDivId);
+            library.splice(parentDivId, 1);
+            // update localStorage
+            localStorage.setItem('library', JSON.stringify(library));
+            displayBooks();
+        })
+    }
+}
 
 document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
     const name = document.querySelector('#name').value;
     const author = document.querySelector('#author').value;
     const genre = document.querySelector('#genre').value;

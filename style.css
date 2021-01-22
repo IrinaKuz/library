@@ -19,6 +19,7 @@ h1{
 /* Main */
 main{
     max-width: 80%;
+    min-height: 100vh;
     margin: auto;
     background-color: white;
     padding: 2em 4em;
@@ -27,11 +28,11 @@ main{
 .library {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 .card {
     width: 350px;
     margin-bottom: 2em;
+    margin-right: 2em;
     border: 1px solid plum;
     box-shadow: 2px 2px plum;
     padding: 1em;
