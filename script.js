@@ -39,6 +39,11 @@ function displayBooks() {
         const status = document.createElement('p');
         status.innerText = library[i].status == true ? 'Read' : 'Not Read';
         bookDiv.appendChild(status);
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML= '&times;';
+        closeBtn.setAttribute('class', 'closeBtn');
+        closeBtn.setAttribute('title', 'delete book');
+        bookDiv.appendChild(closeBtn);
     }
 }
 

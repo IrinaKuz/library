@@ -6,7 +6,59 @@
 body{
     font-size: 16px;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: plum;
 }
+h1, h2, h3, h4, h5, h6{
+    font-weight: normal;
+}
+h1{
+    font-size: 3em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+/* Main */
+main{
+    max-width: 80%;
+    margin: auto;
+    background-color: white;
+    padding: 2em 4em;
+}
+/* library */
+.library {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card {
+    width: 350px;
+    margin-bottom: 2em;
+    border: 1px solid plum;
+    box-shadow: 2px 2px plum;
+    padding: 1em;
+    position: relative; /* for positioning close button */
+}
+.card h3{
+    font-size: 150%;
+    margin-bottom: 0.5em;
+}
+.card p:first-of-type{
+    font-style: italic;
+}
+.closeBtn{
+    padding: 2px 5px;
+    font-size: 30px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.closeBtn:hover{
+    background-color: plum;
+}
+/* Form */
 form {
     width: 646px;
     margin: auto;
