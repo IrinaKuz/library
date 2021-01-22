@@ -30,12 +30,12 @@ main{
     flex-wrap: wrap;
 }
 .card {
-    width: 350px;
-    margin-bottom: 2em;
-    margin-right: 2em;
+    width: calc(33.33% - 2em);
+    margin: 1em;
     border: 1px solid plum;
     box-shadow: 2px 2px plum;
     padding: 1em;
+    overflow: hidden;
     position: relative; /* for positioning close button */
 }
 .card h3{
@@ -77,11 +77,11 @@ form input {
     display: block;
     float: left;
     font-size: 16px;
+    margin-bottom: 1.5em;
 }
 form label{
     clear: left;
     width: 200px;
-    margin-bottom: 1.5em;
 }
 form input{
     width: 400px;
@@ -108,4 +108,36 @@ form button{
     outline: none;
     border-radius: 6px;
     cursor: pointer;
+}
+
+@media all and (max-width: 1400px) {
+    main{
+        padding: 1em;
+        max-width: none;
+    }
+    .card{
+        flex: 0 1 calc(50% - 2em);
+        margin-right: 1em;
+    }
+}
+
+@media all and (max-width: 800px) {
+    form {
+        width: 100%;
+    }
+    form input,
+    form label{
+        display: block;
+        float: none;
+        width: 100%;
+    }
+    main{
+        padding: 1em;
+        max-width: none;
+    }
+    .card{
+        flex: 1 1 100%;
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
