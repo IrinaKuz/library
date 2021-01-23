@@ -98,3 +98,23 @@ document.querySelector('form').addEventListener('submit', function(e) {
     localStorage.setItem('library', JSON.stringify(library));
 })
 
+// Expanded menu
+const menu = document.querySelector('.expanded-menu');
+console.log(menu);
+const toggleBtn = document.querySelector('#toggle-nav');
+console.log(toggleBtn);
+toggleBtn.addEventListener('click', function() {
+    console.log('toggle menu');
+    menu.classList.toggle('open');
+    if(menu.classList.contains('open')) {
+        this.innerHTML = '&times';
+    } else {
+        this.innerHTML = '&#9776';
+    }
+});
+
+// close nav after click on a link
+document.querySelector('nav a').addEventListener('click', function() {
+    menu.classList.remove('open');
+    toggleBtn.innerHTML = '&#9776';
+})
