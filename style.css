@@ -105,6 +105,17 @@ main{
 .closeBtn:hover{
     background-color: plum;
 }
+.changeStatus {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.changeStatus span{
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+.activeRead{
+    background-color: plum;
+}
 /* Form */
 form {
     width: 646px;

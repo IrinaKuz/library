@@ -19,9 +19,7 @@ function addBookToLibrary(book) {
 function displayBooks() {
     const libraryDiv = document.querySelector('.library');
     libraryDiv.innerHTML = '';
-    console.log('displayBooks function');
     for(let i =  0; i < library.length; i++) {
-        console.log(library[i]);
         const bookDiv = document.createElement('div');
         bookDiv.setAttribute('class', 'card');
         bookDiv.setAttribute('data-id', i);
@@ -38,9 +36,25 @@ function displayBooks() {
         const pages = document.createElement('p');
         pages.innerText = library[i].pages;
         bookDiv.appendChild(pages);
-        const status = document.createElement('p');
-        status.innerText = library[i].status == true ? 'Read' : 'Not Read';
-        bookDiv.appendChild(status);
+    
+        // div for changing status spans
+        const divStatus = document.createElement('div');
+        divStatus.setAttribute('class', 'changeStatus');
+        bookDiv.appendChild(divStatus);
+
+        const statusRead = document.createElement('span');
+        statusRead.innerText = 'Read';
+        divStatus.appendChild(statusRead);
+        const statusNotRead = document.createElement('span');
+        statusNotRead.innerText = 'Not Read';
+        divStatus.appendChild(statusNotRead);
+        console.log(library[i].status);
+        if(library[i].status) {
+            statusRead.setAttribute('class', 'activeRead');
+        } else {
+            statusNotRead.setAttribute('class', 'activeRead');
+        }
+
         const closeBtn = document.createElement('button');
         closeBtn.innerHTML= '&times;';
         closeBtn.setAttribute('class', 'closeBtn');
@@ -48,6 +62,7 @@ function displayBooks() {
         bookDiv.appendChild(closeBtn);
     }
     closeBtnsAddListeners();
+    changeStatusAddListeners();
 }
 
 if(localStorage.getItem('library')) {
@@ -66,7 +81,6 @@ function closeBtnsAddListeners() {
     const closeBtns = document.querySelectorAll('.closeBtn');
     for (let i = 0; i < closeBtns.length; i++) {
         closeBtns[i].addEventListener('click', function() {
-            console.log('hooray!');
             const parentDivId = this.parentElement.getAttribute('data-id');
             console.log('data-id: ' + parentDivId);
             library.splice(parentDivId, 1);
@@ -76,7 +90,27 @@ function closeBtnsAddListeners() {
         })
     }
 }
-
+function changeStatusAddListeners() {
+    const changeStatus = document.querySelectorAll('.changeStatus span');
+    for(let i = 0; i < changeStatus.length; i++) {
+        changeStatus[i].addEventListener('click', function() {
+            const parentDiv = this.parentElement;
+            const parentDivId = parentDiv.parentElement.getAttribute('data-id');
+            console.log(library[parentDivId].status);
+            if (library[parentDivId].status == true) {
+                library[parentDivId].status = false;
+            }  else {
+                library[parentDivId].status = true;
+            } 
+            console.log('after:');
+            console.log(library[parentDivId].status);
+            console.log(library);
+            // update localStorage
+            localStorage.setItem('library', JSON.stringify(library));
+            displayBooks();
+        });
+    }
+}
 document.querySelector('form').addEventListener('submit', function(e) {
     const name = document.querySelector('#name').value;
     const author = document.querySelector('#author').value;
