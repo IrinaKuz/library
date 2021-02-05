@@ -1,17 +1,17 @@
 let library = [];
-
-function Book(name, author, genre, pages, status) {
-    this.name = name;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
-    if(status == 'yes') {
-        this.status = true;
-    } else {
-        this.status = false;
+class Book {
+    constructor(name, author, genre, pages, status) {
+        this.name = name;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        if(status == 'yes') {
+            this.status = true;
+        } else {
+            this.status = false;
+        }
     }
 }
-
 function addBookToLibrary(book) {
     library.push(book);
 }
@@ -36,7 +36,7 @@ function displayBooks() {
         const pages = document.createElement('p');
         pages.innerText = library[i].pages;
         bookDiv.appendChild(pages);
-    
+        
         // div for changing status spans
         const divStatus = document.createElement('div');
         divStatus.setAttribute('class', 'changeStatus');
@@ -61,56 +61,57 @@ function displayBooks() {
         closeBtn.setAttribute('title', 'delete book');
         bookDiv.appendChild(closeBtn);
     }
-    closeBtnsAddListeners();
-    changeStatusAddListeners();
+        closeBtnsAddListeners();
+        changeStatusAddListeners();
 }
-
-if(localStorage.getItem('library')) {
-    const localStorageLibrary = localStorage.getItem('library');
-    library = JSON.parse(localStorageLibrary);
-    console.log(library);
-    displayBooks();
-} else {
-    library.push(
-        new Book('War and Peace', 'Leo Tolstoy', 'drama', 1000, false), 
-        new Book("Harry Potter and the Sorcerer's Stone", 'J. K. Rowling', "children's literature", '', false)
-        );
-    displayBooks();
-}
-function closeBtnsAddListeners() {
-    const closeBtns = document.querySelectorAll('.closeBtn');
-    for (let i = 0; i < closeBtns.length; i++) {
-        closeBtns[i].addEventListener('click', function() {
-            const parentDivId = this.parentElement.getAttribute('data-id');
-            console.log('data-id: ' + parentDivId);
-            library.splice(parentDivId, 1);
-            // update localStorage
-            localStorage.setItem('library', JSON.stringify(library));
-            displayBooks();
-        })
-    }
-}
-function changeStatusAddListeners() {
-    const changeStatus = document.querySelectorAll('.changeStatus span');
-    for(let i = 0; i < changeStatus.length; i++) {
-        changeStatus[i].addEventListener('click', function() {
-            const parentDiv = this.parentElement;
-            const parentDivId = parentDiv.parentElement.getAttribute('data-id');
-            console.log(library[parentDivId].status);
-            if (library[parentDivId].status == true) {
-                library[parentDivId].status = false;
-            }  else {
-                library[parentDivId].status = true;
-            } 
-            console.log('after:');
-            console.log(library[parentDivId].status);
+        if(localStorage.getItem('library')) {
+            const localStorageLibrary = localStorage.getItem('library');
+            library = JSON.parse(localStorageLibrary);
             console.log(library);
-            // update localStorage
-            localStorage.setItem('library', JSON.stringify(library));
             displayBooks();
-        });
+        } else {
+            library.push(
+                new Book('War and Peace', 'Leo Tolstoy', 'drama', 1000, false), 
+                new Book("Harry Potter and the Sorcerer's Stone", 'J. K. Rowling', "children's literature", '', false)
+                );
+            displayBooks();
+        }
+
+    function closeBtnsAddListeners() {
+        const closeBtns = document.querySelectorAll('.closeBtn');
+        for (let i = 0; i < closeBtns.length; i++) {
+            closeBtns[i].addEventListener('click', function() {
+                const parentDivId = this.parentElement.getAttribute('data-id');
+                console.log('data-id: ' + parentDivId);
+                library.splice(parentDivId, 1);
+                // update localStorage
+                localStorage.setItem('library', JSON.stringify(library));
+                displayBooks();
+            })
+        }
     }
-}
+    function changeStatusAddListeners() {
+        const changeStatus = document.querySelectorAll('.changeStatus span');
+        for(let i = 0; i < changeStatus.length; i++) {
+            changeStatus[i].addEventListener('click', function() {
+                const parentDiv = this.parentElement;
+                const parentDivId = parentDiv.parentElement.getAttribute('data-id');
+                console.log(library[parentDivId].status);
+                if (library[parentDivId].status == true) {
+                    library[parentDivId].status = false;
+                }  else {
+                    library[parentDivId].status = true;
+                } 
+                console.log('after:');
+                console.log(library[parentDivId].status);
+                console.log(library);
+                // update localStorage
+                localStorage.setItem('library', JSON.stringify(library));
+                displayBooks();
+            });
+        }
+    }
+  
 document.querySelector('form').addEventListener('submit', function(e) {
     const name = document.querySelector('#name').value;
     const author = document.querySelector('#author').value;
